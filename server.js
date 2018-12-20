@@ -2,6 +2,7 @@ let express = require('express')
 let app = express()
 let bodyParser = require('body-parser')
 let database = require('./database')
+let twilio  = require('./twilio')
 
 app.use(bodyParser.json())
 app.use(express.static('static'))
@@ -14,11 +15,11 @@ app.get('/api/sms', function (req, res) {
 
 app.post('/api/sms', function (req, res) {
   let sms = {
-    id: req.body.id,
     numbers: req.body.numbers,
     message: req.body.message
   }
   database.createSms(sms, (r) => {
+    twilio.sendSms(sms.message)
     res.json(r)
   })
 })

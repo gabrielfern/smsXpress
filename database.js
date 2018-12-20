@@ -2,7 +2,7 @@ const MongoClient = require('mongodb').MongoClient
 const assert = require('assert')
 const RandExp = require('randexp')
 
-const url = 'mongodb://localhost:27017'
+const url = process.env.MONGODB_URI
 const dbName = 'smsxpress'
 const protocolGen = new RandExp(/[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}/)
 

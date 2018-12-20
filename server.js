@@ -1,20 +1,26 @@
 let express = require('express')
 let app = express()
+let bodyParser = require('body-parser')
 let database = require('./database')
 
-// database.createSms(0, ['123', '456'], 'this is a message')
-// database.getSms(1, (message) => {
-//   console.log(message)
-// })
-
+app.use(bodyParser.json())
+app.use(express.static('static'))
 
 app.get('/api/sms', function (req, res) {
-  res.send('Hello World')
+  database.getSms(req.body.id, (sms) => {
+    res.json(sms)
+  })
 })
 
 app.post('/api/sms', function (req, res) {
-  res.send('Hello World')
+  let sms = {
+    id: req.body.id,
+    numbers: req.body.numbers,
+    message: req.body.message
+  }
+  database.createSms(sms, (r) => {
+    res.json(r)
+  })
 })
 
-app.use(express.static('static'))
 app.listen(3000)

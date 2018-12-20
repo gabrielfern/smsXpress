@@ -5,16 +5,18 @@ const client = require('twilio')(accountSid, authToken)
 const twilioNumber = '+5547933007071'
 
 function sendSms(message, callback) {
-  client.messages.create({
-    body: message,
-    from: twilioNumber,
-    to: '+5583987682063'
-  })
-    .then(res => {
-      if (callback)
-        callback(res.sid)
-     })
-    .done()
+  if (message) {
+    client.messages.create({
+      body: message,
+      from: twilioNumber,
+      to: '+5583987682063'
+    })
+      .then(res => {
+        if (callback)
+          callback(res.sid)
+       })
+      .done()  
+  }
 }
 
 module.exports = { sendSms }

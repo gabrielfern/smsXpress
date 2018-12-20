@@ -14,12 +14,27 @@
 
   <body ng-app='smsXpress'>
     <div class='container' ng-controller='sms'>
+      <div class="container">
+        <h1>smsXpress</h1>
+        <hr>
+        <div class="input-group mb-3">
+          <input type='text' class="form-control" placeholder="Numbers" ng-model='numbers'>
+        </div>
+        <div class="input-group mb-3">
+          <input type='text' class="form-control" placeholder="Message" class='container' ng-model='message'>
+        </div>
+        <button class="btn btn-primary" ng-click='sendSms()'>Send SMS</button>
+        <label>{{ protocol }}</label>
+      </div>
       <hr>
-      <input type='text' class='container' ng-model='numbers'>
-      <hr>
-      <input type='text' class='container' ng-model='message'>
-      <button ng-click='sendSms()'>Send SMS</button>
-      <hr>
+      <div class="container">
+        <div class="input-group mb-3">
+          <input type='text' class="form-control" placeholder="Protocol" ng-model="protocolCheck">
+          <button class="btn btn-primary" ng-click="getSms()">check</button>
+        </div>
+        <label class="container">{{ numbersCheck }}</label>
+        <label class="container">{{ messageCheck }}</label>
+      </div>
     </div>
   </body>
 </html>

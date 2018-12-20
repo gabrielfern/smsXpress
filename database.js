@@ -1,16 +1,18 @@
 const MongoClient = require('mongodb').MongoClient
 const assert = require('assert')
+const RandExp = require('randexp')
 
 const url = 'mongodb://localhost:27017'
 const dbName = 'smsxpress'
+const protocolGen = new RandExp(/[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}/)
 
-function getSms (id, callback) {
+function getSms (protocol, callback) {
   MongoClient.connect(url, { useNewUrlParser: true }, function (err, client) {
     assert.strictEqual(null, err)
     let db = client.db(dbName)
     let collection = db.collection('sms')
 
-    collection.findOne({ id }, function (err, sms) {
+    collection.findOne({ protocol }, function (err, sms) {
       assert.strictEqual(err, null)
       callback(sms)
       client.close()
@@ -24,10 +26,11 @@ function createSms (sms, callback) {
     let db = client.db(dbName)
     let collection = db.collection('sms')
 
+    sms.protocol = protocolGen.gen()
     collection.insertOne(sms, function (err, res) {
       assert.strictEqual(err, null)
       if (callback) {
-        callback(res.result)
+        callback(res.ops[0])
       }
       client.close()
     })

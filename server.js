@@ -7,7 +7,7 @@ app.use(bodyParser.json())
 app.use(express.static('static'))
 
 app.get('/api/sms', function (req, res) {
-  database.getSms(req.body.id, (sms) => {
+  database.getSms(req.body.protocol, (sms) => {
     res.json(sms)
   })
 })

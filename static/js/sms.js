@@ -5,6 +5,8 @@ angular.module('smsXpress', [])
   $scope.messageCheck = 'Mensagem: '
   $scope.showConfirmation = false
   $scope.showProtocol = false
+  $scope.price = 0
+
   $scope.sendSms = function() {
     fetch('/api/sms', {
       method: 'POST',
@@ -52,5 +54,16 @@ angular.module('smsXpress', [])
         $scope.messageCheck = 'Mensagem: ' + json.message
         $scope.$apply()
       })
+  }
+
+  $scope.calculatePrice = function() {
+    if ($scope.numbers && $scope.message) {
+      let nums = $scope.numbers.replace(/[\s+]/g, '')
+      let messg = $scope.message.replace(/\s/g, '')
+      $scope.price += nums.length/8*0.10
+      $scope.price += messg.length/10*0.05
+    } else {
+      $scope.price = 0
+    }
   }
 })

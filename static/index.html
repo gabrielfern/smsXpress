@@ -30,17 +30,17 @@
         <div class="input-group mb-3">
           <input type='text' class="form-control" placeholder="Mensagem" class='container' ng-model='message' ng-show='!showProtocol && !showConfirmation'>
         </div>
-        <button class="btn btn-primary" ng-show='!showProtocol && !showConfirmation' ng-click='showConfirmation = true'>Continuar</button>
+        <button class="btn btn-primary" ng-show='!showProtocol && !showConfirmation' ng-click='showConfirmation = true; calculatePrice()'>Continuar</button>
         <h3 ng-show='showProtocol'>Parabéns! Seu SMS foi enviado com sucesso.</h3>
         <label ng-show='showProtocol'>{{ protocol }}</label>
         <br>
-        <button class="btn btn-primary" ng-show='showProtocol' ng-click='showProtocol = false; numbers = ""; message = ""'>Voltar</button>
+        <button class="btn btn-primary" ng-show='showProtocol' ng-click='showProtocol = false; numbers = ""; message = ""; price = 0'>Voltar</button>
       </div>
 
       <div class="container" ng-show='showConfirmation'>
-        <h3>Seu sms irá custar: R$ 1,50</h3>
+        <h3>Seu sms irá custar: R$ {{ price }}</h3>
         <button class="btn btn-primary" ng-click='sendSms()'>Confirmar envio</button>
-        <button class="btn btn-danger" ng-click='showConfirmation = false'>Cancelar</button>
+        <button class="btn btn-danger" ng-click='showConfirmation = false; price = 0'>Cancelar</button>
       </div>
 
       <div class="modal fade" id="consultaModal" tabindex="-1" role="dialog" aria-labelledby="consultaModalLabel" aria-hidden="true">

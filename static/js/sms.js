@@ -1,8 +1,9 @@
 angular.module('smsXpress', [])
 .controller('sms', function($scope) {
-  $scope.protocol = 'Protocolo: '
+  $scope.protocol = 'Esse é seu protocolo: '
   $scope.numbersCheck = 'Números: '
   $scope.messageCheck = 'Mensagem: '
+  $scope.showConfirmation = false
   $scope.showProtocol = false
   $scope.sendSms = function() {
     fetch('/api/sms', {
@@ -23,8 +24,9 @@ angular.module('smsXpress', [])
         }
       })
       .then(json => {
+        $scope.showConfirmation = false
         $scope.showProtocol = true
-        $scope.protocol = 'Protocolo: ' + json.protocol
+        $scope.protocol = 'Esse é seu protocolo: ' + json.protocol
         $scope.$apply()
       })
   }

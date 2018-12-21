@@ -25,13 +25,21 @@
       <div class="container">
         <hr>
         <div class="input-group mb-3">
-          <input type='text' class="form-control" placeholder="Números" ng-model='numbers'>
+          <input type='text' class="form-control" placeholder="Números" ng-model='numbers' ng-show='!showProtocol && !showConfirmation'>
         </div>
         <div class="input-group mb-3">
-          <input type='text' class="form-control" placeholder="Mensagem" class='container' ng-model='message'>
+          <input type='text' class="form-control" placeholder="Mensagem" class='container' ng-model='message' ng-show='!showProtocol && !showConfirmation'>
         </div>
-        <button class="btn btn-primary" ng-click='sendSms()'>Envie SMS</button>
+        <button class="btn btn-primary" ng-show='!showProtocol && !showConfirmation' ng-click='showConfirmation = true'>Continuar</button>
+        <h3 ng-show='showProtocol'>Parabéns! Seu SMS foi enviado com sucesso.</h3>
         <label ng-show='showProtocol'>{{ protocol }}</label>
+        <br>
+        <button class="btn btn-primary" ng-show='showProtocol' ng-click='showProtocol = false'>Voltar</button>
+      </div>
+
+      <div class="container" ng-show='showConfirmation'>
+        <h3>Seu sms irá custar: R$ 1,50</h3>
+        <button class="btn btn-primary" ng-click='sendSms()'>Confirmar envio</button>
       </div>
 
       <div class="modal fade" id="consultaModal" tabindex="-1" role="dialog" aria-labelledby="consultaModalLabel" aria-hidden="true">

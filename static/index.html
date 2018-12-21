@@ -14,26 +14,56 @@
 
   <body ng-app='smsXpress'>
     <div class='container' ng-controller='sms'>
+
+      <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">smsXpress</a>
+        <div class="row">
+          <button class="btn btn-outline-primary my-2 my-sm-0 float-right" data-toggle="modal" data-target="#consultaModal">Consultas</button>
+        </div>
+      </nav>
+
       <div class="container">
-        <h1>smsXpress</h1>
         <hr>
         <div class="input-group mb-3">
-          <input type='text' class="form-control" placeholder="Numbers" ng-model='numbers'>
+          <input type='text' class="form-control" placeholder="Números" ng-model='numbers'>
         </div>
         <div class="input-group mb-3">
-          <input type='text' class="form-control" placeholder="Message" class='container' ng-model='message'>
+          <input type='text' class="form-control" placeholder="Mensagem" class='container' ng-model='message'>
         </div>
-        <button class="btn btn-primary" ng-click='sendSms()'>Send SMS</button>
-        <label>{{ protocol }}</label>
+        <button class="btn btn-primary" ng-click='sendSms()'>Envie SMS</button>
+        <label ng-show='showProtocol'>{{ protocol }}</label>
       </div>
+
+      <div class="modal fade" id="consultaModal" tabindex="-1" role="dialog" aria-labelledby="consultaModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="consultaModalLabel">Consulta de SMS</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container">
+                <div class="input-group mb-3">
+                  <input type='text' class="form-control" placeholder="Protocolo" ng-model="protocolCheck">
+                  <button class="btn btn-primary" ng-click="getSms()">Consultar</button>
+                </div>
+                <label class="container">{{ numbersCheck }}</label>
+                <label class="container">{{ messageCheck }}</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <hr>
       <div class="container">
-        <div class="input-group mb-3">
-          <input type='text' class="form-control" placeholder="Protocol" ng-model="protocolCheck">
-          <button class="btn btn-primary" ng-click="getSms()">check</button>
-        </div>
-        <label class="container">{{ numbersCheck }}</label>
-        <label class="container">{{ messageCheck }}</label>
+        <h2>Sobre</h2>
+        O smsXpress permite a você enviar SMSs direto do seu browser, sem dificuldades. Você tem a opção de enviar uma mensagem para um ou mais números, ou checar as mensagens que você já enviou usando o protocolo que você recebe ao enviar um SMS pelo smsXpress.
       </div>
     </div>
   </body>

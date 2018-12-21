@@ -1,8 +1,9 @@
 angular.module('smsXpress', [])
 .controller('sms', function($scope) {
-  $scope.protocol = 'Protocol: '
-  $scope.numbersCheck = 'Numbers: '
-  $scope.messageCheck = 'Message: '
+  $scope.protocol = 'Protocolo: '
+  $scope.numbersCheck = 'Números: '
+  $scope.messageCheck = 'Mensagem: '
+  $scope.showProtocol = false
   $scope.sendSms = function() {
     fetch('/api/sms', {
       method: 'POST',
@@ -22,7 +23,8 @@ angular.module('smsXpress', [])
         }
       })
       .then(json => {
-        $scope.protocol = 'Protocol: ' + json.protocol
+        $scope.showProtocol = true
+        $scope.protocol = 'Protocolo: ' + json.protocol
         $scope.$apply()
       })
   }
@@ -44,8 +46,8 @@ angular.module('smsXpress', [])
         }
       })
       .then(json => {
-        $scope.numbersCheck = 'Numbers: ' + json.numbers
-        $scope.messageCheck = 'Message: ' + json.message
+        $scope.numbersCheck = 'Números: ' + json.numbers
+        $scope.messageCheck = 'Mensagem: ' + json.message
         $scope.$apply()
       })
   }

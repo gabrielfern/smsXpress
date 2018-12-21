@@ -34,7 +34,7 @@
         <h3 ng-show='showProtocol'>Parabéns! Seu SMS foi enviado com sucesso.</h3>
         <label ng-show='showProtocol'>{{ protocol }}</label>
         <br>
-        <button class="btn btn-primary" ng-show='showProtocol' ng-click='showProtocol = false'>Voltar</button>
+        <button class="btn btn-primary" ng-show='showProtocol' ng-click='showProtocol = false; numbers = ""; message = ""'>Voltar</button>
       </div>
 
       <div class="container" ng-show='showConfirmation'>
